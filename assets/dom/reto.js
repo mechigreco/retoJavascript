@@ -13,6 +13,9 @@ frasePalindroma.addEventListener("click", function(){
     console.log(subcadena);
     console.log(reves);
     var flag ;
+
+    
+
    for (let index = 0; index < cantidad ; index++) {
        console.log("f ", frase[index]);
        console.log("r",reves[index]);
@@ -23,51 +26,72 @@ frasePalindroma.addEventListener("click", function(){
        }
    }
    
+   console.log(flag);
      
-    document.getElementById("palindromo").innerHTML= template(flag, fraseaCorroborar)
+    document.getElementById("palindromo").innerHTML= `<p> Es ${fraseaCorroborar}  palindroma??? <br>La respuesta es... ${flag} </p>`
 });
 
-function template(rta, fr){
-     
-    return `<p> Es ${fr}  palindroma??? <br>La respuesta es... ${rta} </p>`
-}
+
 // Reto 2
-const losPaises = ["Kazajistan","Argentina", "Brazil", "Paraguay", "Peru", "Republica Dominicana", "El Salvador"]; //, "Estados Unidos de America"];
+const losPaises = ["Kazajistan","Argentina", "Brazil", "Paraguay", "Peru", "Republica Dominicana", "El Salvador"];// "Estados Unidos de America"];
 const btnPaises = document.querySelector("#botonLongestCountry");
-const mayor = []
-var nmayor=0, npais,nn=0;
-var ubi = 0;
-btnPaises.addEventListener("click", function(){
-    losPaises.forEach(element => {
-        const sinEspacio = element.replace(/ /g, "");
-        console.log(sinEspacio);
-        const longitud = sinEspacio.length
-        console.log(longitud);
-        mayor.push(longitud);
-        
-    });
-    
-    
-    console.log(mayor);
-    
-    var max = Math.max(...mayor);
-    console.log(max);
-    
-    for (let i = 0; i < mayor.length; i++) {
-        const element = mayor[i];
-        if (element==max){
-             ubi = i;
-        }
-    }
+var cantidadLetras = 0;
+var elMayor ='';
 
-    console.log("cantidad de letras", losPaises[ubi]);
-    document.getElementById("country").innerHTML= template(losPaises[ubi], max)
+btnPaises.addEventListener("click", function(){
+    document.querySelector("#country").innerHTML= `<p> El pais  ${elMayor}  tiene ${cantidadLetras} letras, por tanto es el mayor </p>`
+})
+
+
+    const calcularCantidad = (losPaises)=>{
+        
+        for (let index = 0; index < losPaises.length; index++) {
+            if(losPaises[index].length > cantidadLetras){
+                    cantidadLetras = losPaises[index].replace(/ /g,"").length;
+                    elMayor = losPaises[index]
+            }
+        }
+        return elMayor, cantidadLetras;
+    }
+    console.log(calcularCantidad(losPaises));
+    // document.querySelector("#country").innerHTML= `<p> El pais  ${elMayor}  tiene ${cantidadLetras} letras, por tanto es el mayor </p>`
+
+
+
+// const mayor = []
+// var nmayor=0, npais,nn=0;
+// var ubi = 0;
+// btnPaises.addEventListener("click", function(){
+//     losPaises.forEach(element => {
+//         const sinEspacio = element.replace(/ /g, "");
+//         console.log(sinEspacio);
+//         const longitud = sinEspacio.length
+//         console.log(longitud);
+//         mayor.push(longitud);
+        
+//     });
     
-});
-function template(pais, letras){
+    
+//     console.log(mayor);
+    
+//     var max = Math.max(...mayor);
+//     console.log(max);
+    
+//     for (let i = 0; i < mayor.length; i++) {
+//         const element = mayor[i];
+//         if (element==max){
+//              ubi = i;
+//         }
+//     }
+
+//     console.log("cantidad de letras", losPaises[ubi]);
+//     document.getElementById("country").innerHTML= template(losPaises[ubi], max)
+    
+// });
+// function template(pais, letras){
      
-    return `<p> El pais  ${pais}  tiene ${letras} letras, por tanto es el mayor </p>`
-}
+//     return `<p> El pais  ${pais}  tiene ${letras} letras, por tanto es el mayor </p>`
+// }
 
 // Reto 3
 
@@ -90,7 +114,7 @@ function farenhaitToCelsius(far){
 // Reto 4
 const retoPar = document.querySelector("#cantidadParametros");
 retoPar.addEventListener("click", function(){
-    cantidadParams(1,2,3, 'hola', 4,6,7,10,8);
+    cantidadParams(1,2,3, 'hola', 4,6,7);
 
 
     function cantidadParams(){
